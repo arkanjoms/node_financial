@@ -98,7 +98,7 @@ module.exports = {
    * @param req
    * @param res
    * @param next
-     */
+   */
   update: function (req, res, next) {
     Customer.update(req.param('id'), req.params.all(), function customerUpdated(err) {
       if (err) {
@@ -107,6 +107,17 @@ module.exports = {
 
       res.redirect('/customer/show/' + req.param('id'));
     })
+  },
+
+  /**
+   *
+   * @param req
+   * @param res
+   * @param next
+   */
+  destroy: function (req, res, next) {
+    Customer.destroy(req.param('id')).exec(function () {
+      res.redirect('/customer/');
+    })
   }
 };
-
