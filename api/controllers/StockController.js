@@ -29,13 +29,19 @@ module.exports = {
     })
   },
 
+  /**
+   *
+   * @param req
+   * @param res
+   * @param next
+   */
   create: function (req, res, next) {
     Stock.create(req.params.all(), function stockCreated(err, stock) {
       if (err) {
         next(err);
       }
 
-      res.json(stock);
+      res.redirect('/customer/show/' + stock.owner);
     })
   }
 };
