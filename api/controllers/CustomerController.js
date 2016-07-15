@@ -4,7 +4,6 @@
  * @description :: Server-side logic for managing customers
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
-
 module.exports = {
 
   /**
@@ -50,6 +49,24 @@ module.exports = {
 
       res.view({
         customer: customer
+      })
+    })
+  },
+
+  /**
+   *
+   * @param req
+   * @param res
+   * @param next
+     */
+  index: function (req, res, next) {
+    Customer.find(function foundCustomer(err, customers) {
+      if (err) {
+        return next(err);
+      }
+
+      res.view({
+        customers: customers
       })
     })
   }
