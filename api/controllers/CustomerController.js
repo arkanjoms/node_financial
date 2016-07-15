@@ -58,7 +58,7 @@ module.exports = {
    * @param req
    * @param res
    * @param next
-     */
+   */
   index: function (req, res, next) {
     Customer.find(function foundCustomer(err, customers) {
       if (err) {
@@ -68,6 +68,44 @@ module.exports = {
       res.view({
         customers: customers
       })
+    })
+  },
+
+  /**
+   *
+   * @param req
+   * @param res
+   * @param next
+   */
+  edit: function (req, res, next) {
+    Customer.findOne(req.param('id'), function foundCustomer(err, customer) {
+      if (err) {
+        return next(err);
+      }
+
+      if (!customer) {
+        return next();
+      }
+
+      res.view({
+        customer: customer
+      })
+    })
+  },
+
+  /**
+   *
+   * @param req
+   * @param res
+   * @param next
+     */
+  update: function (req, res, next) {
+    Customer.update(req.param('id'), req.params.all(), function customerUpdated(err) {
+      if (err) {
+        return res.redirect('/customer/edit/' + req.param('id'));
+      }
+
+      res.redirect('/customer/show/' + req.param('id'));
     })
   }
 };

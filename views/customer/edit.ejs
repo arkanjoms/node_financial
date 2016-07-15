@@ -1,0 +1,9 @@
+<form action="/customer/update/<%= customer.id %>" method="post">
+
+  <h2>Update a customer</h2>
+
+  <input value="<%= customer.name %>" type="text" name="name"> <br/>
+  <input value="<%= customer.email %>" type="text" name="email"> <br/>
+  <input value="<%= customer.state %>" type="text" name="state"> <br/>
+  <input type="submit" value="Edit Customer">
+</form>
